@@ -4,8 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ground"
     tools:context=".GameActivity_01">
+
+    <com.example.example_01.MySurfaceView
+        android:id="@+id/mysv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/txv"
