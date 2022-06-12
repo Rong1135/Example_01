@@ -1,5 +1,6 @@
 package com.example.example_01
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -21,7 +22,7 @@ class GameActivity_01 : AppCompatActivity() {
                 txv.text = "剩餘時間： $i"  // update text
                 delay(1000)
             }
-            txv.text = "時間到!"
+            finish()
         }
 
     }
