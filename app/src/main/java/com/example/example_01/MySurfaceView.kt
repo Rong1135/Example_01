@@ -1,10 +1,7 @@
 package com.example.example_01
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Rect
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.SurfaceHolder
@@ -14,18 +11,13 @@ class MySurfaceView(context: Context?, attrs: AttributeSet?): SurfaceView(contex
 
     lateinit var surfaceHolder: SurfaceHolder
     lateinit var BG: Bitmap
+    lateinit var mouse: Bitmap
 
-    /* 設定地鼠屬性 */
-    lateinit var mouse1: Mouse
-    lateinit var mouse2: Mouse
-    lateinit var mouse3: Mouse
-    lateinit var mouse4: Mouse
-    lateinit var mouse5: Mouse
-    lateinit var mouse6: Mouse
-    lateinit var mouse7: Mouse
-    lateinit var mouse8: Mouse
-    lateinit var mouse9: Mouse
-    lateinit var mouse10: Mouse
+    /* 物體移動及反彈-宣告屬性(變數) */
+    var xPos: Int = 0
+    var yPos: Int = 0
+    var deltaX: Int = 5
+    var deltaY: Int = 5
 
     /* 宣告觸控遊戲屬性 */
     lateinit var Player: Bitmap
@@ -34,9 +26,23 @@ class MySurfaceView(context: Context?, attrs: AttributeSet?): SurfaceView(contex
     var Score: Int = 0  // 成績
     var Shooting: Int = 0   // 消失時間
 
+
+    /* 設定地鼠屬性 */
+    private var mouse1: Mouse
+    private var mouse2: Mouse
+    private var mouse3: Mouse
+    private var mouse4: Mouse
+    private var mouse5: Mouse
+    private var mouse6: Mouse
+    private var mouse7: Mouse
+    private var mouse8: Mouse
+    private var mouse9: Mouse
+    private var mouse10: Mouse
+
     init {
         surfaceHolder = getHolder()
         BG = BitmapFactory.decodeResource(getResources(), R.drawable.ground)
+        mouse = BitmapFactory.decodeResource(getResources(), R.drawable.m1)
         surfaceHolder.addCallback(this)
 
         /* 設定觸控遊戲初始值 */
@@ -87,16 +93,40 @@ class MySurfaceView(context: Context?, attrs: AttributeSet?): SurfaceView(contex
 
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return false
-    }
+    fun drawSomething(canvas: Canvas) {
+        /* 背景圖 */
+        canvas.drawBitmap(BG, 0f, 0f, null)
 
-    private fun drawSomething(canvas: Canvas) {
-        var SrcRext: Rect = Rect(0, 0, BG.width, BG.height)
-        var w: Int = BG.width / 3
-        var h: Int = BG.height / 3
-        var DestRect: Rect = Rect(0, 0, w, h)
-        canvas.drawBitmap(BG, SrcRext, DestRect, null)
+        /* 物體移動及反彈 */
+        // 測試
+        var SrcRext: Rect = Rect(0, 0, mouse.width, mouse.height)
+        var w: Int = mouse.width / 8
+        var h: Int = mouse.height / 8
+
+        xPos += deltaX
+        yPos += deltaY
+        if(xPos >= getWidth()-w || xPos <= 0)
+            deltaX *= -1
+        if(yPos >= getHeight()-h || yPos <= 0)
+            deltaY *= -1
+
+        // DestRect = Rect(0, 0, w, h)
+        var DestRect: Rect = Rect(xPos, yPos, w+xPos, h+yPos)
+        canvas.drawBitmap(mouse, SrcRext, DestRect, null)
+
+        /* 觸控偵測 */
+        if (Shooting > 0)
+            Shooting--
+        else
+            canvas.drawBitmap(mouse, SrcRext, DestRect, null)
+
+        canvas.drawBitmap(Player, PlayerX, PlayerY, null)
+
+        // 繪製得分文字
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.color = Color.BLACK
+        paint.textSize = 45f
+        canvas.drawText("得分:"+Score.toString(), 600f,72f, paint)
 
         mouse1.draw(canvas)
         mouse2.draw(canvas)
@@ -108,6 +138,21 @@ class MySurfaceView(context: Context?, attrs: AttributeSet?): SurfaceView(contex
         mouse8.draw(canvas)
         mouse9.draw(canvas)
         mouse10.draw(canvas)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        PlayerX = event!!.x
+        PlayerY = event!!.y
+        var w:Int = mouse.width / 6
+        var h:Int = mouse.height / 6
+
+        if ((PlayerX >= xPos) && (PlayerX <= xPos+w) && (PlayerY >= yPos) && (PlayerY <= yPos+h)){
+            Score++
+            Shooting = 10
+        }
+        PlayerX -= Player.width / 2
+        PlayerY -= Player.height / 2
+        return false
     }
 
 }

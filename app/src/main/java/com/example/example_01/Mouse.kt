@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Rect
+import android.view.MotionEvent
 
 class Mouse(context: Context) {
 
@@ -33,6 +34,12 @@ class Mouse(context: Context) {
     fun draw(canvas: Canvas) {
         DestRect = Rect(MouseX, MouseY, MouseX+w, MouseY+h)
         canvas.drawBitmap(image, SrcRect, DestRect, null)
+    }
+
+
+    fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        return false
     }
 
 }
