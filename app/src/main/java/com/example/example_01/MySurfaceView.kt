@@ -27,17 +27,17 @@ class MySurfaceView(context: Context?, attrs: AttributeSet?): SurfaceView(contex
     var Shooting: Int = 0   // 消失時間
 
 
-    /* 設定地鼠屬性 */
-    private var mouse1: Mouse
-    private var mouse2: Mouse
-    private var mouse3: Mouse
-    private var mouse4: Mouse
-    private var mouse5: Mouse
-    private var mouse6: Mouse
-    private var mouse7: Mouse
-    private var mouse8: Mouse
-    private var mouse9: Mouse
-    private var mouse10: Mouse
+//    /* 設定地鼠屬性 */
+//    private var mouse1: Mouse
+//    private var mouse2: Mouse
+//    private var mouse3: Mouse
+//    private var mouse4: Mouse
+//    private var mouse5: Mouse
+//    private var mouse6: Mouse
+//    private var mouse7: Mouse
+//    private var mouse8: Mouse
+//    private var mouse9: Mouse
+//    private var mouse10: Mouse
 
     init {
         surfaceHolder = getHolder()
@@ -48,35 +48,35 @@ class MySurfaceView(context: Context?, attrs: AttributeSet?): SurfaceView(contex
         /* 設定觸控遊戲初始值 */
         Player = BitmapFactory.decodeResource(getResources(), R.drawable.hammer)
 
-        /* 設定地鼠初始值 */
-        mouse1 = Mouse(context!!)
-        mouse2 = Mouse(context!!)
-        mouse2.MouseX = 1080
-        mouse2.MouseY = 380
-        mouse3 = Mouse(context!!)
-        mouse3.MouseX = 900
-        mouse3.MouseY = 280
-        mouse4 = Mouse(context!!)
-        mouse4.MouseX = 660
-        mouse4.MouseY = 400
-        mouse5 = Mouse(context!!)
-        mouse5.MouseX = 660
-        mouse5.MouseY = 120
-        mouse6 = Mouse(context!!)
-        mouse6.MouseX = 500
-        mouse6.MouseY = 280
-        mouse7 = Mouse(context!!)
-        mouse7.MouseX = 360
-        mouse7.MouseY = 140
-        mouse8 = Mouse(context!!)
-        mouse8.MouseX = 370
-        mouse8.MouseY = 400
-        mouse9 = Mouse(context!!)
-        mouse9.MouseX = 40
-        mouse9.MouseY = 140
-        mouse10 = Mouse(context!!)
-        mouse10.MouseX = 70
-        mouse10.MouseY = 350
+//        /* 設定地鼠初始值 */
+//        mouse1 = Mouse(context!!)
+//        mouse2 = Mouse(context!!)
+//        mouse2.MouseX = 1080
+//        mouse2.MouseY = 380
+//        mouse3 = Mouse(context!!)
+//        mouse3.MouseX = 900
+//        mouse3.MouseY = 280
+//        mouse4 = Mouse(context!!)
+//        mouse4.MouseX = 660
+//        mouse4.MouseY = 400
+//        mouse5 = Mouse(context!!)
+//        mouse5.MouseX = 660
+//        mouse5.MouseY = 120
+//        mouse6 = Mouse(context!!)
+//        mouse6.MouseX = 500
+//        mouse6.MouseY = 280
+//        mouse7 = Mouse(context!!)
+//        mouse7.MouseX = 360
+//        mouse7.MouseY = 140
+//        mouse8 = Mouse(context!!)
+//        mouse8.MouseX = 370
+//        mouse8.MouseY = 400
+//        mouse9 = Mouse(context!!)
+//        mouse9.MouseX = 40
+//        mouse9.MouseY = 140
+//        mouse10 = Mouse(context!!)
+//        mouse10.MouseX = 70
+//        mouse10.MouseY = 350
     }
 
     override fun surfaceCreated(p0: SurfaceHolder) {
@@ -128,16 +128,16 @@ class MySurfaceView(context: Context?, attrs: AttributeSet?): SurfaceView(contex
         paint.textSize = 45f
         canvas.drawText("得分:"+Score.toString(), 600f,72f, paint)
 
-        mouse1.draw(canvas)
-        mouse2.draw(canvas)
-        mouse3.draw(canvas)
-        mouse4.draw(canvas)
-        mouse5.draw(canvas)
-        mouse6.draw(canvas)
-        mouse7.draw(canvas)
-        mouse8.draw(canvas)
-        mouse9.draw(canvas)
-        mouse10.draw(canvas)
+//        mouse1.draw(canvas)
+//        mouse2.draw(canvas)
+//        mouse3.draw(canvas)
+//        mouse4.draw(canvas)
+//        mouse5.draw(canvas)
+//        mouse6.draw(canvas)
+//        mouse7.draw(canvas)
+//        mouse8.draw(canvas)
+//        mouse9.draw(canvas)
+//        mouse10.draw(canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
